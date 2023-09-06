@@ -5,6 +5,9 @@
 class Rectangle:
     """Define a retangle"""
 
+    number_of_instances = 0
+    print_symbol = '#'
+
     def __init__(self, width=0, height=0):
         """ Start a new retangle
         args:
@@ -14,6 +17,7 @@ class Rectangle:
         """
         self.width = width
         self.height = height
+        Rectangle.number_of_instances += 1
 
     @property
     def width(self):
@@ -62,7 +66,7 @@ class Rectangle:
 
         r = []
         for i in range(self.__height):
-            [r.append('#') for n in range(self.__width)]
+            [r.append(str(self.print_symbol)) for n in range(self.__width)]
             if i != self.__height - 1:
                 r.append("\n")
         return ("".join(r))
@@ -72,3 +76,8 @@ class Rectangle:
         r = "Rectangle(" + str(self.__width)
         r += ", " + str(self.__height) + ")"
         return (r)
+
+    def __del__(self):
+        """Print a message when the retangle is deleted"""
+        Rectangle.number_of_instances -= 1
+        print("Bye rectangle...")

@@ -5,6 +5,9 @@
 class Rectangle:
     """Define a retangle"""
 
+    number_of_instances = 0
+    print_symbol = '#'
+
     def __init__(self, width=0, height=0):
         """ Start a new retangle
         args:
@@ -14,6 +17,7 @@ class Rectangle:
         """
         self.width = width
         self.height = height
+        Rectangle.number_of_instances += 1
 
     @property
     def width(self):
@@ -53,6 +57,27 @@ class Rectangle:
             return (0)
         return ((self.__width * 2) + (self.__height * 2))
 
+    @staticmethod
+    def bigger_or_equal(rect_1, rect_2):
+        """ Compare and return first one if wqual"""
+        if not isinstance(rect_1, Rectangle):
+            raise TypeError("rect_1 must be an instance of Rectangle")
+        if not isinstance(rect_2, Rectangle):
+            raise TypeError("rect_2 must be an instance of Rectangle")
+        if rect_1.area() >= rect_2.area():
+            return rect_1
+        return rect_2
+
+    @classmethod
+    def square(cls, size=0):
+        """ Return a new retangle
+
+        args:
+        size int
+        retrun (cls(size, sizr))
+        """
+        return cls(size, size)
+
     def __str__(self):
         """Return the printable representation of the retangle
         Represent the retangle with #
@@ -62,7 +87,7 @@ class Rectangle:
 
         r = []
         for i in range(self.__height):
-            [r.append('#') for n in range(self.__width)]
+            [r.append(str(self.print_symbol)) for n in range(self.__width)]
             if i != self.__height - 1:
                 r.append("\n")
         return ("".join(r))
@@ -72,3 +97,8 @@ class Rectangle:
         r = "Rectangle(" + str(self.__width)
         r += ", " + str(self.__height) + ")"
         return (r)
+
+    def __del__(self):
+        """Print a message when the retangle is deleted"""
+        Rectangle.number_of_instances -= 1
+        print("Bye rectangle...")

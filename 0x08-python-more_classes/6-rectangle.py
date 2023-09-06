@@ -5,6 +5,8 @@
 class Rectangle:
     """Define a retangle"""
 
+    number_of_instances = 0
+
     def __init__(self, width=0, height=0):
         """ Start a new retangle
         args:
@@ -14,6 +16,7 @@ class Rectangle:
         """
         self.width = width
         self.height = height
+        Rectangle.number_of_instances += 1
 
     @property
     def width(self):
@@ -26,7 +29,7 @@ class Rectangle:
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value < 0:
-            raise ValueError("width must be >= 0")
+            raise TypeError("width must be >= 0")
         self.__width = value
 
     @property
@@ -72,3 +75,8 @@ class Rectangle:
         r = "Rectangle(" + str(self.__width)
         r += ", " + str(self.__height) + ")"
         return (r)
+
+    def __del__(self):
+        """Print a message when the retangle is deleted"""
+        Rectangle.number_of_instances -= 1
+        print("Bye rectangle...")
