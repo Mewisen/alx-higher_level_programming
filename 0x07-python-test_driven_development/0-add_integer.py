@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """
+<<<<<<< HEAD
 
 This module is composed by a function that adds two numbers
 
@@ -19,6 +20,19 @@ def add_integer(a, b=98):
     Raises:
         TypeError: If a or b aren't integer and/or float numbers
 
+=======
+This module is composed by a function that adds two numbers
+"""
+def add_integer(a, b=98):
+    """ Function that adds two integers and/or float numbers
+    Args:
+        a: first number
+        b: second number
+    Ruturn:
+        The addition of the two given numbers
+    Raises:
+        TypeError: If a or b aren't integer and/or float numers
+>>>>>>> e9d83ad4a58936e721bd23ba1abf69aeec7567a7
     """
 
     if not isinstance(a, int) and not isinstance(a, float):
